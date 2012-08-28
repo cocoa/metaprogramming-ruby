@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class MyClass
   def testing_self
     @var=10
@@ -13,5 +11,4 @@ class MyClass
 end
 
 
-obj = MyClass.new
-puts obj.testing_self.inspect
+MyClass.new.testing_self    # => #<MyClass:0x007fab8183c320 @var=11> 

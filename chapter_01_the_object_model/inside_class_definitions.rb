@@ -15,6 +15,6 @@ class A
   def c;'c';end
 end
 
-puts obj = A.new
-puts obj.b
-puts obj.c
+obj = A.new
+obj.b
+obj.c

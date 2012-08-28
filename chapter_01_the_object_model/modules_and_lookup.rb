@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 module M
   def my_method
     'M#my_method()'
@@ -13,5 +11,5 @@ end
 class D < C
 end
 
-puts D.new.my_method
-puts "D.ancestors # => #{D.ancestors}"
+D.new.my_method         # => "M#my_method()" 
+D.ancestors             # => [D, C, M, Object, Kernel, BasicObject] 

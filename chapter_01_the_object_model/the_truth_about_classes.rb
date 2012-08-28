@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # class definition
 class MyClass
   def my_method
@@ -7,13 +5,16 @@ class MyClass
   end
 end
 
+
 # we create here a new object
-obj = MyClass.new
-puts obj.class
+obj = MyClass.new         # => #<MyClass:0x007fe9dc8ff278>
+obj.class                 # => MyClass 
+
 
 # obj instance variables
-obj.my_method
-puts obj.instance_variables.inspect
+obj.my_method             # => 1
+obj.instance_variables    # => [:@v] 
+
 
 # obj methods (filtered)
-puts obj.methods.grep(/^my/).inspect
+obj.methods.grep(/^m/)    # => [:my_method, :methods, :method] 
