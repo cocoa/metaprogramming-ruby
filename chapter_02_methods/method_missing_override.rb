@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class Lawyer
   def method_missing(method, *args)
     puts "You called: #{method}( #{args.join(' , ')} )"
