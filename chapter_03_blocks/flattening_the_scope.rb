@@ -1,5 +1,5 @@
 
-my_var = 'success'
+my_var = 'Success'
 
 # class MyClass
 #   def my_method
