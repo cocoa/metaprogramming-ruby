@@ -1,39 +1,11 @@
-# add a Kernel method named add_checked_attribute() using
-# Kernel#eval() to add a simple validated attribute to a class
-
-
-# Here is the method that you should implement. 
-# (We called the class argument "clazz", because 
-# "class" is a reserved keyword.)
-
-
-def add_checked_attribute(clazz, attribute)
-  text = %Q{
-    class #{clazz}
-      def #{attribute}
-        @#{attribute}
-      end
-      
-      def #{attribute}=(value)
-        raise 'Invalid attribute' unless value
-        @#{attribute}=value
-      end
-    end
-    }
-  # puts text
-  eval(text)
-end
-
-
-# testing implementation
-
 require 'test/unit'
 
-class Person; end
+class Person;end
 
-class TestCheckedAttribute < Test::Unit::TestCase
+class TestCheckedAttribute <  Test::Unit::TestCase
+
   def setup
-    add_checked_attribute(Person, :age)
+    add_checked_attribute Person, :age
     @bob = Person.new
   end
 
@@ -55,3 +27,18 @@ class TestCheckedAttribute < Test::Unit::TestCase
   end
 end
 
+
+def add_checked_attribute(clazz,attribute)
+  q = "
+    class #{clazz}
+      def #{attribute}
+        @#{attribute}
+      end
+      def #{attribute}=(value)
+        raise 'Invalid attribute' unless value
+        @#{attribute}=value
+      end
+    end
+    "
+  eval q
+end

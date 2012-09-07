@@ -1,69 +1,32 @@
-# add a Kernel method named add_checked_attribute() using
-# Kernel#eval() to add a simple validated attribute to a class
+# def add_method_to_class( k , m )
+#   get = "def #{m};@hi;end"
+#   set = "def #{m}=(value);@hi=value;end"
+#   p get 
+#   p set
+#   k.class_eval get
+#   k.class_eval set
+# end
 
 
-# Here is the method that you should implement. 
-# (We called the class argument "clazz", because 
-# "class" is a reserved keyword.)
-
-
-def add_checked_attribute(clazz, attribute)
-  clazz.class_eval do
-    define_method attribute do
-      instance_variable_get "@#{attribute}"
+def add_method_to_class( k, m )
+  k.class_eval{
+    define_method "#{m}" do
+      instance_variable_get "@#{m}"
     end
-    define_method "#{attribute}=" do |value|
+    define_method "#{m}=" do |value|
       raise 'Invalid attribute' unless value
-      instance_variable_set "@#{attribute}" , value
+      instance_variable_set "@#{m}", value
     end
-  end
+  }
 end
 
 
+add_method_to_class String, :hello
 
+p String.instance_methods(false).grep /hello/
 
-
-# my another working option... (bad clues)
-#def add_checked_attribute(clazz, attribute)
-#  clazz.send :define_method, attribute do
-#    @attribute
-#  end
-#
-#  clazz.send :define_method, "#{attribute}=".to_sym do |value|
-#    raise 'Invalid attribute' unless value
-#    @attribute = value
-#  end
-#end
-
-
-
-# testing implementation
-
-require 'test/unit'
-
-class Person; end
-
-class TestCheckedAttribute < Test::Unit::TestCase
-  def setup
-    add_checked_attribute(Person, :age)
-    @bob = Person.new
-  end
-
-  def test_accepts_valid_values
-    @bob.age = 20
-    assert_equal 20, @bob.age
-  end
-
-  def test_refuses_nil_values
-    assert_raises RuntimeError, 'Invalid attribute' do
-      @bob.age = nil
-    end
-  end
-
-  def test_refuses_false_values
-    assert_raises RuntimeError, 'Invalid attribute' do
-      @bob.age = false
-    end
-  end
-end
+cadena = String.new
+p cadena.hello= 'dummy'
+p cadena.hello
+p cadena.hello= nil
 
